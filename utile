@@ -1,0 +1,22 @@
+L.geoJson(someGeojsonFeature, {
+	    pointToLayer: function (feature, latlng) { return L.circleMarker(latlng, geojsonMarkerOptions);},
+		onEachFeature:function	(feature, layer) {if (feature.properties){layer.bindPopup(feature.properties.matricule);}}
+	  
+	}).addTo(mymap);
+var map = L.map('map', {
+    center: [14.683318, -17.45907],
+    zoom: 10,
+    layers: [base]
+});
+
+	<th:block layout:fragment="code">
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+
+            $(function () {
+  						      $("#date_d_service").datepicker();
+  						    $("#date_f_service").datepicker();
+   					 });
+/*]]>*/
+  </script>
+</th:block>
