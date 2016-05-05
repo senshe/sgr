@@ -34,6 +34,10 @@ public class UsersServiceImpl implements UsersService{
 	public Users add(Users user, String code) {
 		
 		Role r=roles.findByCode(code);
+		if(r==null)
+		{
+			
+		}
 		Collection<Role> roles =new HashSet();
 		roles.add(r);
 		user.setRoles(roles);
@@ -62,6 +66,18 @@ public class UsersServiceImpl implements UsersService{
 	public void delete(String nni) {
 		// TODO Auto-generated method stub
 		users.delete(nni);
+	}
+	@Override
+	public Users addRoleToUser(Users user, String roleCode) {
+		Role r=roles.findByCode(roleCode);
+		if(r==null)
+		{
+			
+		}
+		
+		user.getRoles().add(r);
+		users.save(user);
+		return user;
 	}
 
 	

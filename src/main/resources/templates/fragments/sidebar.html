@@ -1,12 +1,17 @@
-
-                <nav  xmlns:th="http://www.thymeleaf.org"	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"	class="navbar-default navbar-side" role="navigation"	layout:fragment="nav">
+ <nav  
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		class="navbar-default navbar-side" role="navigation"
+		layout:fragment="nav"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+		
                       <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     
                     <li>
                         <a   href=""><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAuthority('ADMIND')">
                         <a  href=""><i class="fa fa-table fa-3x"></i> Gestion des Structures<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -20,7 +25,7 @@
                             
                         </ul>
                     </li>
-                    <li>
+                    <li	sec:authorize="hasAuthority('ADMINS')">>
                         <a  href=""><i class="fa fa-edit fa-3x"></i> Gestion des utilisateurs<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -32,7 +37,7 @@
                             
                         </ul>
                     </li>
-                     <li>
+                     <li	sec:authorize="hasAuthority('ADMIND')">
                         <a  href=""><i class="fa fa-table fa-3x"></i> Gestion des equipements<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

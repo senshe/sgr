@@ -11,5 +11,5 @@ Users update(Users users);
 List<Users> findAll();
 Users findOne(String nni);
 void delete(String id);
-
+Users addRoleToUser(Users user, String roleCode);
 }

@@ -1,7 +1,7 @@
 package com.rimitech.sgr.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +13,14 @@ import com.rimitech.sgr.models.Users;
 import com.rimitech.sgr.services.StructureServiceImpl;
 
 @Controller
+
 @RequestMapping(value="structure")
+
 public class StructureController {
 	
 	   @Autowired
 	   StructureServiceImpl	structureService;
-	
+	   	@PreAuthorize("hasAuthority('ADMIND')")
 		@RequestMapping(method=RequestMethod.GET)
 		public ModelAndView	 index()
 	    {
@@ -31,6 +33,7 @@ public class StructureController {
 	     *
 	     * @return Response
 	     */
+		
 		@RequestMapping(value="/add",method=RequestMethod.GET)
 	    public	ModelAndView  create(ModelAndView	mv)
 	    {

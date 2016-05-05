@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import com.rimitech.sgr.security.AccountDetailsService;
 
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled =true)
 public class SecurityConfig{
 	
 	
@@ -45,20 +47,25 @@ public class SecurityConfig{
 		}
 	}
 
-	@Configuration                                                   
+	@Configuration
+	
 	public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 		@Override
 		  protected void configure(HttpSecurity http) throws Exception {
 				//http.csrf().disable();
 				/*
-					http.authorizeRequests().anyRequest().permitAll();
+				 *  
+				 */
+				//	http.authorizeRequests().anyRequest().permitAll();
 				//*/
 				
 				//*
 		//	http.ignoring().antMatchers("/webjars/**","/css/**","/js/**","/img/**","/font-awesome/**");
-				 http
+				http
 			      .authorizeRequests()
 			      		.antMatchers("/webjars/**","/css/**","/js/**","/img/**","/font-awesome/**").permitAll()
+			      		.antMatchers("/structure/**").access("hasAuthority('ADMIND')")
+			      		.antMatchers("/user/**").access("hasAuthority('ADMINS')")
 			      		.anyRequest()
 			      		.authenticated()
 			         	.and()

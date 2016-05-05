@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.rimitech.sgr.dao.RolesRepository;
@@ -29,7 +30,7 @@ public class StructureServiceImpl implements StructureService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Structure add(Structure structure, Users admin) {
-		admin.setPassword("admins");
+		admin.setPassword(new BCryptPasswordEncoder().encode("admins"));
 		structure.setType("S");
 	//	admin.setRoles(roles);
 		structures.save(structure);
@@ -41,7 +42,7 @@ public class StructureServiceImpl implements StructureService{
 	@Override
 	public List<Structure> findAll() {
 		
-		return structures.findAll();
+		return structures.findByType("S");
 	}
 
 	@Override
