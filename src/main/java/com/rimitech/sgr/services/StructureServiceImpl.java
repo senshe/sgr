@@ -30,7 +30,7 @@ public class StructureServiceImpl implements StructureService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Structure add(Structure structure, Users admin) {
-		admin.setPassword(new BCryptPasswordEncoder().encode("admins"));
+		admin.setPassword("admins");
 		structure.setType("S");
 	//	admin.setRoles(roles);
 		structures.save(structure);
